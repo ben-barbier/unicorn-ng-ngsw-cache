@@ -1,0 +1,7 @@
+<h1>detail {{id}}</h1>
+<pre *ngIf="unicorn | async as unicorn; else loading">
+    {{unicorn | json}}
+</pre>
+<ng-template #loading>
+    <img src="assets/loader.gif"/>
+</ng-template>

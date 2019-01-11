@@ -1,0 +1,29 @@
+{
+    "index": "/index.html",
+    "assetGroups": [],
+    "dataGroups": [
+        {
+            "name": "api-unicorns-list",
+            "urls": [
+                "/rs/unicorns$"
+            ],
+            "cacheConfig": {
+                "maxSize": 100,
+                "maxAge": "1d",
+                "timeout": "200u",
+                "strategy": "freshness"
+            }
+        },
+        {
+            "name": "api-unicorn-detail",
+            "urls": [
+                "/rs/unicorns/**"
+            ],
+            "cacheConfig": {
+                "maxSize": 100,
+                "maxAge": "1d",
+                "strategy": "performance"
+            }
+        }
+    ]
+}
