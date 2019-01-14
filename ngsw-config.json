@@ -48,6 +48,17 @@
                 "maxAge": "1d",
                 "strategy": "performance"
             }
+        },
+        {
+            "name": "unicorn-photos",
+            "urls": [
+                "http://localhost:3000/unicorns/photos/*.*"
+            ],
+            "cacheConfig": {
+                "maxSize": 100,
+                "maxAge": "20d",
+                "strategy": "performance"
+            }
         }
     ]
 }
