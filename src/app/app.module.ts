@@ -8,6 +8,7 @@ import {environment} from '../environments/environment';
 import {HttpClientModule} from '@angular/common/http';
 import {DetailComponent} from './pages/detail/detail.component';
 import {ListComponent} from './pages/list/list.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
     declarations: [
@@ -19,7 +20,8 @@ import {ListComponent} from './pages/list/list.component';
         BrowserModule,
         AppRoutingModule,
         HttpClientModule,
-        ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production})
+        ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
+        BrowserAnimationsModule
     ],
     providers: [],
     bootstrap: [AppComponent]
