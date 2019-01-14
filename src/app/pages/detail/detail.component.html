@@ -1,10 +1,15 @@
 <h1>detail {{id}}</h1>
-<section *ngIf="unicorn | async as unicorn; else loading">
+<section *ngIf="unicorn | async as unicorn; else loadingOrError">
     <app-unicorn-card
         [unicorn]="unicorn"
         (deleted)="gotoList()"
     ></app-unicorn-card>
 </section>
-<ng-template #loading>
-    <img src="assets/loader.gif"/>
+<ng-template #loadingOrError>
+    <mat-card *ngIf="missing; else loading" class="missing">
+        <img src="assets/missing-unicorn.jpg">
+    </mat-card>
+    <ng-template #loading>
+        <img src="assets/loader.gif"/>
+    </ng-template>
 </ng-template>
