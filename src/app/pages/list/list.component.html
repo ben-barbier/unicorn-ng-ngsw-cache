@@ -1,8 +1,9 @@
 <h1>List</h1>
-<section *ngIf="unicorns | async as unicorns; else loading">
+<section *ngIf="unicorns; else loading">
     <app-unicorn-card
         *ngFor="let unicorn of unicorns"
         [unicorn]="unicorn"
+        (deleted)="removeUnicornFromList($event)"
     ></app-unicorn-card>
 </section>
 <ng-template #loading>

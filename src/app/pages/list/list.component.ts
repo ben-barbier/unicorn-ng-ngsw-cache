@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {Unicorn} from '../../shared/models/unicorn.model';
+import {UnicornsService} from '../../shared/services/unicorns.service';
 
 @Component({
     selector: 'app-list',
@@ -8,9 +9,13 @@ import {HttpClient} from '@angular/common/http';
 })
 export class ListComponent {
 
-    public unicorns = this.http.get('/rs/unicorns');
+    public unicorns: Unicorn[];
 
-    constructor(private http: HttpClient) {
+    constructor(private unicornsService: UnicornsService) {
+        this.unicornsService.getAll().subscribe(unicorns => this.unicorns = unicorns);
     }
 
+    public removeUnicornFromList(unicornToDelete: Unicorn) {
+        this.unicorns = this.unicorns.filter(unicorn => unicorn.id !== unicornToDelete.id);
+    }
 }
