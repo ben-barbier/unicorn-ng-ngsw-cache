@@ -23,6 +23,7 @@ export class UnicornCardComponent {
 
     public deleteUnicorn(unicorn: Unicorn) {
         this.unicornsService.delete(unicorn).pipe(
+            tap(() => this.cache.flushList()),
             tap(() => this.cache.flushOne(unicorn.id)),
             tap(() => this.deleted.emit(unicorn)),
         ).subscribe();
