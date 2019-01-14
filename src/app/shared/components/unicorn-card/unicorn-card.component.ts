@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Unicorn} from '../../models/unicorn.model';
 import {tap} from 'rxjs/operators';
 import {UnicornsService} from '../../services/unicorns.service';
+import {CacheService} from '../../services/cache.service';
 
 @Component({
     selector: 'app-unicorn-card',
@@ -16,11 +17,13 @@ export class UnicornCardComponent {
     @Output()
     public deleted = new EventEmitter<Unicorn>();
 
-    constructor(private unicornsService: UnicornsService) {
+    constructor(private unicornsService: UnicornsService,
+                private cache: CacheService) {
     }
 
     public deleteUnicorn(unicorn: Unicorn) {
         this.unicornsService.delete(unicorn).pipe(
+            tap(() => this.cache.flushOne(unicorn.id)),
             tap(() => this.deleted.emit(unicorn)),
         ).subscribe();
     }
