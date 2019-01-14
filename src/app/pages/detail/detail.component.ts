@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {ActivatedRoute, Params} from '@angular/router';
+import {ActivatedRoute, Params, Router} from '@angular/router';
+import {UnicornsService} from '../../shared/services/unicorns.service';
 
 @Component({
     selector: 'app-detail',
@@ -12,12 +12,16 @@ export class DetailComponent {
     public unicorn;
     public id;
 
-    constructor(private http: HttpClient,
-                private route: ActivatedRoute) {
+    constructor(private unicornsService: UnicornsService,
+                private route: ActivatedRoute,
+                private router: Router) {
         this.route.params.subscribe((params: Params) => {
             this.id = params.id;
-            this.unicorn = this.http.get(`/rs/unicorns/${params.id}`);
+            this.unicorn = this.unicornsService.get(params.id);
         });
     }
 
+    public gotoList(): void {
+        this.router.navigate(['']);
+    }
 }

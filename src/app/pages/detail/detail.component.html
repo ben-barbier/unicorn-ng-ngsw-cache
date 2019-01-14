@@ -1,6 +1,9 @@
 <h1>detail {{id}}</h1>
 <section *ngIf="unicorn | async as unicorn; else loading">
-    <app-unicorn-card [unicorn]="unicorn"></app-unicorn-card>
+    <app-unicorn-card
+        [unicorn]="unicorn"
+        (deleted)="gotoList()"
+    ></app-unicorn-card>
 </section>
 <ng-template #loading>
     <img src="assets/loader.gif"/>
