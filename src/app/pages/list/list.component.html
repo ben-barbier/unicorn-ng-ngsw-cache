@@ -1,7 +1,10 @@
 <h1>List</h1>
-<pre *ngIf="unicorns | async as unicorns; else loading">
-    {{ unicorns | json }}
-</pre>
+<section *ngIf="unicorns | async as unicorns; else loading">
+    <app-unicorn-card
+        *ngFor="let unicorn of unicorns"
+        [unicorn]="unicorn"
+    ></app-unicorn-card>
+</section>
 <ng-template #loading>
     <img src="assets/loader.gif"/>
 </ng-template>

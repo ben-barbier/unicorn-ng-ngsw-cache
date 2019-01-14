@@ -11,14 +11,16 @@ import {ListComponent} from './pages/list/list.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavComponent } from './nav/nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
+import {MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatCardModule} from '@angular/material';
+import { UnicornCardComponent } from './shared/components/unicorn-card/unicorn-card.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         DetailComponent,
         ListComponent,
-        NavComponent
+        NavComponent,
+        UnicornCardComponent
     ],
     imports: [
         BrowserModule,
@@ -31,7 +33,8 @@ import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, Mat
         MatButtonModule,
         MatSidenavModule,
         MatIconModule,
-        MatListModule
+        MatListModule,
+        MatCardModule,
     ],
     providers: [],
     bootstrap: [AppComponent]
