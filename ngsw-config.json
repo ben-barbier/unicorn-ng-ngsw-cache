@@ -8,7 +8,7 @@
                 "/rs/unicorns$"
             ],
             "cacheConfig": {
-                "maxSize": 100,
+                "maxSize": 1,
                 "maxAge": "1d",
                 "timeout": "200u",
                 "strategy": "freshness"
