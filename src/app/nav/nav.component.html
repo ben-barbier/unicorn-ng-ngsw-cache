@@ -28,11 +28,13 @@
             <span>ngsw-test</span>
         </mat-toolbar>
         <!-- Add Content Here -->
-        <button (click)="flushList()">Flush list</button>
-        <button (click)="flushOnce(1)">Flush Detail 1</button>
-        <button (click)="flushOnce(2)">Flush Detail 2</button>
-        <button (click)="flushOnce(3)">Flush Detail 3</button>
-        <router-outlet></router-outlet>
+        <section class="main">
+            <button mat-raised-button (click)="flushList()">Flush list</button>
+            <button mat-raised-button (click)="flushOnce(1)">Flush Detail 1</button>
+            <button mat-raised-button (click)="flushOnce(2)">Flush Detail 2</button>
+            <button mat-raised-button (click)="flushOnce(3)">Flush Detail 3</button>
+            <router-outlet></router-outlet>
+        </section>
     </mat-sidenav-content>
 </mat-sidenav-container>
 

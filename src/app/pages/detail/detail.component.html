@@ -1,7 +1,7 @@
 <h1>detail {{id}}</h1>
-<pre *ngIf="unicorn | async as unicorn; else loading">
-    {{unicorn | json}}
-</pre>
+<section *ngIf="unicorn | async as unicorn; else loading">
+    <app-unicorn-card [unicorn]="unicorn"></app-unicorn-card>
+</section>
 <ng-template #loading>
     <img src="assets/loader.gif"/>
 </ng-template>
