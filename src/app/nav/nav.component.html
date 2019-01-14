@@ -1,0 +1,43 @@
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #drawer class="sidenav" fixedInViewport="true"
+                 [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+                 [mode]="(isHandset$ | async) ? 'over' : 'side'"
+                 [opened]="!(isHandset$ | async)">
+        <mat-toolbar>Menu</mat-toolbar>
+        <mat-nav-list>
+            <a mat-list-item [routerLink]="['/']">list</a>
+            <a mat-list-item [routerLink]="['/detail', 1]">detail 1</a>
+            <a mat-list-item [routerLink]="['/detail', 2]">detail 2</a>
+            <a mat-list-item [routerLink]="['/detail', 3]">detail 3</a>
+            <a mat-list-item [routerLink]="['/detail', 4]">detail 4</a>
+            <a mat-list-item [routerLink]="['/detail', 5]">detail 5</a>
+            <a mat-list-item [routerLink]="['/detail', 6]">detail 6</a>
+            <a mat-list-item [routerLink]="['/detail', 7]">detail 7</a>
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <mat-toolbar color="primary">
+            <button
+                type="button"
+                aria-label="Toggle sidenav"
+                mat-icon-button
+                (click)="drawer.toggle()"
+                *ngIf="isHandset$ | async">
+                <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+            </button>
+            <span>ngsw-test</span>
+        </mat-toolbar>
+        <!-- Add Content Here -->
+        <button (click)="flushList()">Flush list</button>
+        <button (click)="flushOnce(1)">Flush Detail 1</button>
+        <button (click)="flushOnce(2)">Flush Detail 2</button>
+        <button (click)="flushOnce(3)">Flush Detail 3</button>
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>
+
+
+
+
+
+
