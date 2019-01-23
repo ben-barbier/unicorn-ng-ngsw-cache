@@ -17,14 +17,11 @@ export class UnicornCardComponent {
     @Output()
     public deleted = new EventEmitter<Unicorn>();
 
-    constructor(private unicornsService: UnicornsService,
-                private cache: CacheService) {
+    constructor(private unicornsService: UnicornsService) {
     }
 
     public deleteUnicorn(unicorn: Unicorn) {
         this.unicornsService.delete(unicorn).pipe(
-            tap(() => this.cache.flushList()),
-            tap(() => this.cache.flushOne(unicorn.id)),
             tap(() => this.deleted.emit(unicorn)),
         ).subscribe();
     }
