@@ -1,8 +1,8 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {Component} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {UnicornsService} from '../../shared/services/unicorns.service';
 import {catchError} from 'rxjs/operators';
-import {Observable, of, Subject, throwError} from 'rxjs';
+import {Observable, throwError} from 'rxjs';
 import {Unicorn} from '../../shared/models/unicorn.model';
 
 @Component({
