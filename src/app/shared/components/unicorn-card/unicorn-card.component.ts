@@ -2,7 +2,6 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Unicorn} from '../../models/unicorn.model';
 import {tap} from 'rxjs/operators';
 import {UnicornsService} from '../../services/unicorns.service';
-import {CacheService} from '../../services/cache.service';
 
 @Component({
     selector: 'app-unicorn-card',

@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { CacheService } from './cache.service';
+import { SwCacheService } from './cache.service';
 
-describe('CacheService', () => {
+describe('SwCacheService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: CacheService = TestBed.get(CacheService);
+    const service: SwCacheService = TestBed.get(SwCacheService);
     expect(service).toBeTruthy();
   });
 });

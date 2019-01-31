@@ -25,7 +25,7 @@
                 *ngIf="isHandset$ | async">
                 <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
             </button>
-            <span>ngsw-test</span>
+            <span>ngsw-test - <button mat-raised-button color="warn" (click)="clearCache()">clear cache</button></span>
         </mat-toolbar>
         <section class="main">
             <router-outlet></router-outlet>

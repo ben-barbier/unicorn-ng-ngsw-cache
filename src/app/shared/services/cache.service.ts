@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
-import {from, Observable} from 'rxjs';
 import {mergeMap, tap} from 'rxjs/operators';
+import {from, Observable} from 'rxjs';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
-export class CacheService {
+export class SwCacheService {
 
     /**
      * RxJS operator that remove cache entry and wait remove action callback
@@ -13,7 +13,7 @@ export class CacheService {
      * Example usage:
      * ```
      * constructor(private http: HttpClient,
-     *             private cache: CacheService) {
+     *             private cache: SwCacheService) {
      * }
      *
      * public delete(unicorn: Unicorn): Observable<void> {
@@ -24,21 +24,43 @@ export class CacheService {
      * }
      * ```
      *
-     * @param cacheName - Name of the datagroup in ngsw-config.json
-     * @param request - Request to remove from the ngsw-config datagroup
+     * @param cacheEntry :
+        *   - cacheName : Name of the datagroup in ngsw-config.json
+     *   - url : Request to remove from the ngsw-config datagroup
+     *
      */
-    public delete = (cacheName: string, request: string) => <T>(source: Observable<T>): Observable<T> =>
+    public delete = (cacheEntry: CacheEntry) => <T>(source: Observable<T>): Observable<T> =>
         new Observable<T>(observer => source.pipe(
-            mergeMap(projet => from(this.removeEntryFromSwCache(cacheName, request)).pipe(
-                tap(() => observer.next(projet))
+            mergeMap(projet => from(this.removeEntryFromSwCache(cacheEntry)).pipe(
+                tap(() => observer.next(projet)),
             )),
         ).subscribe())
 
-    private async removeEntryFromSwCache(cacheName: string, request: string): Promise<boolean> {
+    public async removeEntryFromSwCache(cacheEntry: CacheEntry): Promise<boolean> {
         const cacheKeys = await caches.keys();
-        const cacheKey = cacheKeys.find(name => name.includes(`${cacheName}:cache`));
+        const cacheKey = cacheKeys.find(name => name.includes(`${cacheEntry.cacheName}:cache`));
         const cache = await caches.open(cacheKey);
-        return cache.delete(request);
+        return cache.delete(cacheEntry.url, cacheEntry.options);
     }
 
+    public async clearCache(): Promise<boolean> {
+        debugger;
+        const cacheKeys: string[] = await caches.keys();
+        const cachesDeleted: boolean[] = await Promise.all(cacheKeys.map(cacheName => caches.delete(cacheName)));
+        return cachesDeleted.reduce((acc: boolean, deleted: boolean) => acc && deleted, true);
+    }
+
+}
+
+/**
+ * @documentation options : https://developer.mozilla.org/fr/docs/Web/API/Cache/delete#Param%C3%A8tres
+ */
+export class CacheEntry {
+    cacheName: string;
+    url: RequestInfo;
+    options?: CacheQueryOptions = {
+        ignoreMethod: false,
+        ignoreSearch: false,
+        ignoreVary: false,
+    };
 }

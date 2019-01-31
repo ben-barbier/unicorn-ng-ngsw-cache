@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Unicorn} from '../models/unicorn.model';
 import {Observable} from 'rxjs';
-import {CacheService} from './cache.service';
+import {SwCacheService} from './cache.service';
 
 @Injectable({
     providedIn: 'root'
@@ -10,13 +10,13 @@ import {CacheService} from './cache.service';
 export class UnicornsService {
 
     constructor(private http: HttpClient,
-                private cache: CacheService) {
+                private cache: SwCacheService) {
     }
 
     public delete(unicorn: Unicorn): Observable<void> {
         return this.http.delete<void>(`/rs/unicorns/${unicorn.id}`).pipe(
-            this.cache.delete('api-unicorns-list', '/rs/unicorns'),
-            this.cache.delete('api-unicorn-detail', `/rs/unicorns/${unicorn.id}`),
+            this.cache.delete({cacheName: 'api-unicorns-list', url: '/rs/unicorns'}),
+            this.cache.delete({cacheName: 'api-unicorn-detail', url: `/rs/unicorns/${unicorn.id}`}),
         );
     }
 

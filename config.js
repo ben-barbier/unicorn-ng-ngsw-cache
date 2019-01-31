@@ -8,7 +8,7 @@ const apiProxy = proxy('/rs', {
 });
 
 module.exports = {
-    'port': 4222,
+    'port': 4226,
     'server': {
         middleware: {
             10: apiProxy,
