@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {from, Observable} from 'rxjs';
-import {mergeMap, tap} from 'rxjs/operators';
+import {map, mergeMap} from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
@@ -27,12 +27,19 @@ export class CacheService {
      * @param cacheName - Name of the datagroup in ngsw-config.json
      * @param request - Request to remove from the ngsw-config datagroup
      */
-    public delete = (cacheName: string, request: string) => <T>(source: Observable<T>): Observable<T> =>
-        new Observable<T>(observer => source.pipe(
-            mergeMap(projet => from(this.removeEntryFromSwCache(cacheName, request)).pipe(
-                tap(() => observer.next(projet))
-            )),
-        ).subscribe())
+    public delete(cacheName: string, request: string) {
+        return <T>(source: Observable<T>): Observable<T> => {
+            return new Observable<T>(observer => source.pipe(
+                mergeMap(projet => from(this.removeEntryFromSwCache(cacheName, request)).pipe(
+                    map(() => projet)
+                )),
+            ).subscribe(
+                value => observer.next(value),
+                err => observer.error(err),
+                () => observer.complete(),
+            ));
+        };
+    }
 
     private async removeEntryFromSwCache(cacheName: string, request: string): Promise<boolean> {
         const cacheKeys = await caches.keys();
