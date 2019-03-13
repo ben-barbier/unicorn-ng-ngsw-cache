@@ -28,4 +28,7 @@ export class UnicornsService {
         return this.http.get<Unicorn>(`/rs/unicorns/${unicornId}`);
     }
 
+    public save(unicorn: Unicorn): Observable<unknown> {
+        return this.http.put<Unicorn>(`/rs/unicorns/${unicorn.id}`, unicorn);
+    }
 }

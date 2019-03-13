@@ -2,7 +2,8 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Unicorn} from '../../models/unicorn.model';
 import {tap} from 'rxjs/operators';
 import {UnicornsService} from '../../services/unicorns.service';
-import {CacheService} from '../../services/cache.service';
+import {MatDialog} from '@angular/material';
+import {EditUnicornComponent} from '../../modals/edit-unicorn/edit-unicorn.component';
 
 @Component({
     selector: 'app-unicorn-card',
@@ -17,13 +18,24 @@ export class UnicornCardComponent {
     @Output()
     public deleted = new EventEmitter<Unicorn>();
 
-    constructor(private unicornsService: UnicornsService) {
+    constructor(private unicornsService: UnicornsService,
+                private dialog: MatDialog) {
     }
 
     public deleteUnicorn(unicorn: Unicorn) {
         this.unicornsService.delete(unicorn).pipe(
             tap(() => this.deleted.emit(unicorn)),
         ).subscribe();
+    }
+
+    public editUnicorn(unicorn: Unicorn) {
+        this.dialog.open(EditUnicornComponent, {
+            data: {...unicorn}
+        }).afterClosed().subscribe((updatedUnicorn: Unicorn) => {
+            if (updatedUnicorn) {
+                this.unicorn = updatedUnicorn;
+            }
+        });
     }
 
 }
