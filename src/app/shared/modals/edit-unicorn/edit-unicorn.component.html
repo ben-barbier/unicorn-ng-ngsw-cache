@@ -1,0 +1,19 @@
+<h1 mat-dialog-title>{{unicorn.name}}</h1>
+<form #unicornForm="ngForm" (ngSubmit)="saveUnicorn(unicorn)">
+    <div mat-dialog-content>
+        <mat-form-field>
+            <input placeholder="name" matInput [(ngModel)]="unicorn.name" name="name" required>
+        </mat-form-field>
+        <div>
+            <input type="number" [(ngModel)]="unicorn.birthyear" name="birthyearInput">
+        </div>
+        <div>
+            <app-birthyear [(ngModel)]="unicorn.birthyear" name="birthyear" appPair></app-birthyear>
+        </div>
+        <br>
+    </div>
+    <div mat-dialog-actions>
+        <button mat-raised-button mat-dialog-close>Annuler</button>
+        <button mat-raised-button cdkFocusInitial color="primary" [disabled]="unicornForm.invalid">Enregistrer</button>
+    </div>
+</form>

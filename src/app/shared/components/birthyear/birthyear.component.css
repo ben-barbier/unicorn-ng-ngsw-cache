@@ -1,0 +1,14 @@
+:host {
+    display: flex;
+    align-items: center;
+}
+
+mat-icon {
+    color: yellow;
+    text-shadow: 0 0 10px black;
+    cursor: pointer;
+}
+
+mat-icon:hover {
+    color: red;
+}

@@ -11,6 +11,9 @@
         <div>weight: {{ unicorn.weight }}</div>
     </mat-card-content>
     <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="editUnicorn(unicorn)">
+            <mat-icon>edit</mat-icon>
+        </button>
         <button mat-raised-button color="warn" (click)="deleteUnicorn(unicorn)">
             <mat-icon>delete</mat-icon>
         </button>
