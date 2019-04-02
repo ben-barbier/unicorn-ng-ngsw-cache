@@ -50,6 +50,7 @@ export class BirthyearComponent implements ControlValueAccessor {
     writeValue(birthyear: number): void {
         if (birthyear !== null) {
             this.value = birthyear;
+            this.onTouched();
             this.onChange(this.value);
         }
     }
