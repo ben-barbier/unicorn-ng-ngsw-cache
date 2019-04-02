@@ -25,7 +25,7 @@ import {FormsModule} from '@angular/forms';
 import {BirthyearComponent} from './shared/components/birthyear/birthyear.component';
 import {UnicornCardComponent} from './shared/components/unicorn-card/unicorn-card.component';
 import {EditUnicornComponent} from './shared/modals/edit-unicorn/edit-unicorn.component';
-import { PairValidatorDirective } from './shared/directives/pair-validator.directive';
+import {PairValidatorDirective} from './shared/directives/pair-validator.directive';
 
 @NgModule({
     declarations: [
